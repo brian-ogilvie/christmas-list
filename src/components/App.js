@@ -1,11 +1,16 @@
 import React from 'react';
 import './App.css';
+import { SectionContextProvider } from '../contexts/SectionContext';
+import Sections from './Sections';
 
 function App() {
   return (
-    <div className="App">
-      <h1>App</h1>
-    </div>
+    <SectionContextProvider>
+      <div className="App">
+        <h1>Christmas List</h1>
+        <Sections />
+      </div>
+    </SectionContextProvider>
   );
 }
 
