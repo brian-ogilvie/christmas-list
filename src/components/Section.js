@@ -1,8 +1,12 @@
 import React from 'react';
 import { useSectionContext } from '../contexts/SectionContext';
+import { useItemContext } from '../contexts/ItemContext';
+import Item from './Item';
 
 export default function Section({ id, title }) {
   const { renameSection, deleteSection } = useSectionContext();
+  const { addItem, items } = useItemContext();
+  const filteredItems = items.filter(({ sectionId }) => sectionId === id);
 
   const onDeleteClick = () => {
     const message =
@@ -20,14 +24,28 @@ export default function Section({ id, title }) {
     }
   };
 
+  const onAddItemClick = () => {
+    const message = 'What item would you like to add?';
+    const newItem = window.prompt(message, '');
+    if (newItem) {
+      addItem(id, newItem);
+    }
+  };
+
   return (
     <article>
       <h2>{title}</h2>
-      <button type="button" onClick={onDeleteClick}>
-        Delete Section
+      {filteredItems.map(item => (
+        <Item key={`item-${item.id}`} item={item} />
+      ))}
+      <button type="button" onClick={onAddItemClick}>
+        Add Item
       </button>
       <button type="button" onClick={onRenameClick}>
         Rename Section
+      </button>
+      <button type="button" onClick={onDeleteClick}>
+        Delete Section
       </button>
     </article>
   );
