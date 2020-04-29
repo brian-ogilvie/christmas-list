@@ -14,10 +14,7 @@ export default function Sections() {
   };
 
   return (
-    <div>
-      <button type="button" onClick={onAddSectionClick}>
-        New Section
-      </button>
+    <div className="Sections">
       {sections.map(section => (
         <Section
           key={`section-${section.id}`}
@@ -25,6 +22,10 @@ export default function Sections() {
           title={section.title}
         />
       ))}
+      <button className="add-section" type="button" onClick={onAddSectionClick}>
+        <i title="Add Section" className="fas fa-plus" />
+        New Section
+      </button>
     </div>
   );
 }

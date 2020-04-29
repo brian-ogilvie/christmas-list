@@ -9,7 +9,7 @@ function App() {
     <SectionContextProvider>
       <ItemContextProvider>
         <div className="App">
-          <h1>Christmas List</h1>
+          <h1 className="top-heading">Christmas List</h1>
           <Sections />
         </div>
       </ItemContextProvider>

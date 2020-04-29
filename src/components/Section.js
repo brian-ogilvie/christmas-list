@@ -33,7 +33,17 @@ export default function Section({ id, title }) {
 
   return (
     <article className="Section">
-      <h2>{title}</h2>
+      <div className="Section__header">
+        <h2 className="Section__title">{title}</h2>
+        <div className="Section__header__buttons">
+          <button type="button" onClick={onRenameClick}>
+            <i title="Rename Section" className="fas fa-pencil-alt" />
+          </button>
+          <button type="button" onClick={onDeleteClick}>
+            <i title="Delete Section" className="fas fa-trash-alt" />
+          </button>
+        </div>
+      </div>
       <ul className="Section__list">
         {filteredItems.map(item => (
           <li key={`item-${item.id}`}>
@@ -41,15 +51,12 @@ export default function Section({ id, title }) {
           </li>
         ))}
       </ul>
-      <button type="button" onClick={onAddItemClick}>
-        Add Item
-      </button>
-      <button type="button" onClick={onRenameClick}>
-        Rename Section
-      </button>
-      <button type="button" onClick={onDeleteClick}>
-        Delete Section
-      </button>
+      <div className="Section__controls">
+        <button className="add-item" type="button" onClick={onAddItemClick}>
+          <i title="Add Item" className="fas fa-plus" />
+          Add Item to {title}
+        </button>
+      </div>
     </article>
   );
 }

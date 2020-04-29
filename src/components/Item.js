@@ -26,21 +26,24 @@ export default function Item({ item }) {
 
   return (
     <div className="Item">
-      <h3 className="Item__title">{title}</h3>
-      <label htmlFor={`item-${id}`}>
+      <label htmlFor={`item-${id}`} className="Item__label">
         <input
+          className="Item__checkbox"
           id={`item-${id}`}
           type="checkbox"
           checked={received}
           onChange={onReceiveItemClick}
         />
+        <h3 className="Item__title">{title}</h3>
       </label>
-      <button type="button" onClick={onEditItemClick}>
-        Edit Item
-      </button>
-      <button type="button" onClick={onDeleteItemClick}>
-        Delete Item
-      </button>
+      <div className="Item__controls">
+        <button type="button" onClick={onEditItemClick}>
+          <i title="Edit Item" className="fas fa-pencil-alt" />
+        </button>
+        <button type="button" onClick={onDeleteItemClick}>
+          <i title="Delete Item" className="fas fa-trash-alt" />
+        </button>
+      </div>
     </div>
   );
 }
