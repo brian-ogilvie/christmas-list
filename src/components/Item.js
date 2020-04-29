@@ -2,7 +2,7 @@ import React from 'react';
 import { useItemContext } from '../contexts/ItemContext';
 
 export default function Item({ item }) {
-  const { deleteItem, receiveItem } = useItemContext();
+  const { deleteItem, receiveItem, renameItem } = useItemContext();
   const { title, received, id } = item;
 
   const onDeleteItemClick = () => {
@@ -16,9 +16,17 @@ export default function Item({ item }) {
     receiveItem(id);
   };
 
+  const onEditItemClick = () => {
+    const message = `What would you like to call ${title}?`;
+    const newTitle = window.prompt(message, '');
+    if (newTitle) {
+      renameItem(id, newTitle);
+    }
+  };
+
   return (
-    <div>
-      <h3>{title}</h3>
+    <div className="Item">
+      <h3 className="Item__title">{title}</h3>
       <label htmlFor={`item-${id}`}>
         <input
           id={`item-${id}`}
@@ -27,6 +35,9 @@ export default function Item({ item }) {
           onChange={onReceiveItemClick}
         />
       </label>
+      <button type="button" onClick={onEditItemClick}>
+        Edit Item
+      </button>
       <button type="button" onClick={onDeleteItemClick}>
         Delete Item
       </button>

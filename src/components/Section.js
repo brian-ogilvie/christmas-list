@@ -9,8 +9,7 @@ export default function Section({ id, title }) {
   const filteredItems = items.filter(({ sectionId }) => sectionId === id);
 
   const onDeleteClick = () => {
-    const message =
-      'Are you sure you wish to delete this section? This cannot be undone.';
+    const message = `Are you sure you wish to delete ${title}???`;
     if (window.confirm(message)) {
       deleteSection(id);
     }
@@ -33,11 +32,15 @@ export default function Section({ id, title }) {
   };
 
   return (
-    <article>
+    <article className="Section">
       <h2>{title}</h2>
-      {filteredItems.map(item => (
-        <Item key={`item-${item.id}`} item={item} />
-      ))}
+      <ul className="Section__list">
+        {filteredItems.map(item => (
+          <li key={`item-${item.id}`}>
+            <Item item={item} />
+          </li>
+        ))}
+      </ul>
       <button type="button" onClick={onAddItemClick}>
         Add Item
       </button>

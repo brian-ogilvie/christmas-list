@@ -12,7 +12,9 @@ const defaultState = [
 function reducer(state, action) {
   switch (action.type) {
     case 'addSection': {
-      const id = Math.max(...state.map(({ id }) => id)) + 1;
+      const id = state.length
+        ? Math.max(...state.map(section => section.id)) + 1
+        : 1;
       return [
         ...state,
         {
