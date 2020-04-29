@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext } from 'react';
+import useLocalStorageReducer from '../hooks/useLocalStorageReducer';
 
 const SectionContext = createContext();
 
@@ -73,11 +74,12 @@ export function useSectionContext() {
   return { addSection, deleteSection, renameSection, sections: state };
 }
 
-export function SectionContextProvider({
-  children,
-  initialState = defaultState,
-}) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export function SectionContextProvider({ children }) {
+  const [state, dispatch] = useLocalStorageReducer(
+    reducer,
+    'christmas-list-sections',
+    defaultState
+  );
   return (
     <SectionContext.Provider value={{ state, dispatch }}>
       {children}

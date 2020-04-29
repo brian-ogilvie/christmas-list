@@ -1,4 +1,5 @@
-import React, { useReducer, useContext, createContext } from 'react';
+import React, { useContext, createContext } from 'react';
+import useLocalStorageReducer from '../hooks/useLocalStorageReducer';
 
 const defaultState = [
   {
@@ -97,8 +98,12 @@ export function useItemContext() {
   return { items: state, addItem, receiveItem, renameItem, deleteItem };
 }
 
-export function ItemContextProvider({ children, initialState = defaultState }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export function ItemContextProvider({ children }) {
+  const [state, dispatch] = useLocalStorageReducer(
+    reducer,
+    'christmas-list-items',
+    defaultState
+  );
   return (
     <ItemContext.Provider value={{ state, dispatch }}>
       {children}
